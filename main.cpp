@@ -31,7 +31,7 @@ int main(void) {
 	anglesswStarbucks* starbucks = new anglesswStarbucks();
 
 	starbucks->build(entry_arr, index);
-	Entry* ent = starbucks->getNearest(0.3,0.44);
+	Entry* ent = starbucks->getNearest(0.1,0.9);
 
 	cout << ent->identifier << ' ' << ent->x << ' ' << ent->y << endl;
 

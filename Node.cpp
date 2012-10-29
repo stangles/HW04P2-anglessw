@@ -5,6 +5,7 @@ Node::Node(Entry e)
 {
 	right = left = NULL; 
 	entry = e;
+	best_dist_ = 2;
 }
 
 Node* Node::insert(Entry e, Node* r, bool x_level)
@@ -43,11 +44,21 @@ Node* Node::search(Entry e, Node* r, bool x_level)
 	}
 	if(candidate == NULL)
 		return r;
-	else
-		return candidate;
+	else {
+		if(distance(e,candidate->entry) < distance(e,r->entry))
+			return candidate;
+		else
+			return r;
+	}
 }
 
-void Node::printInOrder(Node* r) {
+double Node::distance(Entry e1, Entry e2)
+{
+	return ((e1.x-e2.x)*(e1.x-e2.x))+((e1.y-e2.y)*(e1.y-e2.y));
+}
+
+void Node::printInOrder(Node* r) 
+{
 	if(r == NULL) return;
 	printInOrder(r->left);
 	cout << r->entry.identifier << endl;
