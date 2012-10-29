@@ -31,11 +31,11 @@ int main(void) {
 	anglesswStarbucks* starbucks = new anglesswStarbucks();
 
 	starbucks->build(entry_arr, index);
-	//Entry* ent = starbucks->getNearest(0.295011306,0.4454744);
+	Entry* ent = starbucks->getNearest(0.3,0.44);
 
-	//cout << ent->identifier << ' ' << ent->x << ' ' << ent->y << endl;
+	cout << ent->identifier << ' ' << ent->x << ' ' << ent->y << endl;
 
-	//delete ent;
+	delete ent;
 	delete starbucks;
 	delete [] entry_arr;
 

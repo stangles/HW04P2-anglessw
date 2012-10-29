@@ -75,11 +75,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="anglesswStarbucks.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="Starbucks.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="anglesswStarbucks.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Node.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
