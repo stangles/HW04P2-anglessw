@@ -3,25 +3,24 @@
 
 Node::Node(Entry e)
 {
-	right = left = NULL; 
-	entry = e;
-	best_dist_ = 2;
+	right_ = left_ = NULL; 
+	entry_ = e;
 }
 
 Node* Node::insert(Entry e, Node* r, bool x_level)
 {
 	if(r == NULL) return new Node(e);
-	if(e.x == r->entry.x || e.y == r->entry.y) return r;
+	if(e.x == r->entry_.x && e.y == r->entry_.y) return r;
 	if(x_level) {
-		if(e.x < r->entry.x) 
-			r->left = insert(e, r->left, !x_level);
+		if(e.x < r->entry_.x) 
+			r->left_ = insert(e, r->left_, !x_level);
 		else 
-			r->right = insert(e, r->right, !x_level);
+			r->right_ = insert(e, r->right_, !x_level);
 	} else {
-		if(e.y < r->entry.y) 
-			r->left = insert(e, r->left, !x_level);
+		if(e.y < r->entry_.y) 
+			r->left_ = insert(e, r->left_, !x_level);
 		else 
-			r->right = insert(e, r->right, !x_level);
+			r->right_ = insert(e, r->right_, !x_level);
 	}
 	return r;
 }
@@ -29,44 +28,54 @@ Node* Node::insert(Entry e, Node* r, bool x_level)
 Node* Node::search(Entry e, Node* r, bool x_level)
 {
 	if(r == NULL) return NULL;
-	if(e.x == r->entry.x || e.y == r->entry.y) return r;
+	if(e.x == r->entry_.x && e.y == r->entry_.y) return r;
 	Node* candidate;
 	if(x_level) {
-		if(e.x < r->entry.x)
-			candidate = search(e,r->left,!x_level);
+		if(e.x < r->entry_.x)
+			candidate = search(e,r->left_,!x_level);
 		else
-			candidate = search(e,r->right,!x_level);
+			candidate = search(e,r->right_,!x_level);
 	} else {
-		if(e.y < r->entry.y)
-			candidate = search(e,r->left,!x_level);
+		if(e.y < r->entry_.y)
+			candidate = search(e,r->left_,!x_level);
 		else
-			candidate = search(e,r->right,!x_level);
+			candidate = search(e,r->right_,!x_level);
 	}
 	if(candidate == NULL)
 		return r;
 	else {
-		if(distance(e,candidate->entry) < distance(e,r->entry))
-			return candidate;
+		if(distance(e.x,candidate->entry_.x,e.y,candidate->entry_.y) < 
+			distance(e.x,r->entry_.x,e.y,r->entry_.y)) {
+				if(x_level) {
+					if(abs(e.x-r->entry_.x) < distance(e.x,candidate->entry_.x,e.y,candidate->entry_.y))
+						candidate = search(e,r->right_,!x_level);
+				} else {
+					if(abs(e.y-r->entry_.y) < distance(e.x,candidate->entry_.x,e.y,candidate->entry_.y))
+						candidate = search(e,r->left_,!x_level);
+				}
+				return candidate;
+		}
 		else
 			return r;
 	}
 }
 
-double Node::distance(Entry e1, Entry e2)
+double Node::distance(double x1, double x2, double y1, double y2)
 {
-	return ((e1.x-e2.x)*(e1.x-e2.x))+((e1.y-e2.y)*(e1.y-e2.y));
+	return ((x1-x2)*(x1-x2))+((y1-y2)*(y1-y2));
 }
 
+/*
 void Node::printInOrder(Node* r) 
 {
 	if(r == NULL) return;
-	printInOrder(r->left);
-	cout << r->entry.identifier << endl;
-	printInOrder(r->right);
-}
+	printInOrder(r->left_);
+	cout << r->entry_.identifier << endl;
+	printInOrder(r->right_);
+}*/
 
 Node::~Node(void)
 {
-	delete left;
-	delete right;
+	delete left_;
+	delete right_;
 }

@@ -34,10 +34,12 @@ Entry* anglesswStarbucks::getNearest(double x, double y)
 	temp->identifier = "temp";
 	temp->x = x;
 	temp->y = y;
-	*temp = root->search(*temp,root,true)->entry;
+	*temp = root->search(*temp,root,true)->entry_;
 	return temp;
 }
 
 anglesswStarbucks::~anglesswStarbucks(void)
 {
+	delete [] entry_arr_;
+	delete root;
 }

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "Starbucks.h"
+//#include "Starbucks.h"
 #include "anglesswStarbucks.h"
 
 //using namespace std;
@@ -31,7 +31,7 @@ int main(void) {
 	anglesswStarbucks* starbucks = new anglesswStarbucks();
 
 	starbucks->build(entry_arr, index);
-	Entry* ent = starbucks->getNearest(0.1,0.9);
+	Entry* ent = starbucks->getNearest(0.235,0.593);
 
 	cout << ent->identifier << ' ' << ent->x << ' ' << ent->y << endl;
 

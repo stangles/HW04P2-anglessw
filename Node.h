@@ -1,18 +1,15 @@
 #pragma once
 #include "Starbucks.h"
-class Node
-{
+class Node {
 public:
-	Node* left;
-	Node* right;
+	Node* left_;
+	Node* right_;
+	Entry entry_;
 	Node(Entry e);
-	Entry entry;
 	Node* insert(Entry e, Node* r, bool x_level);
 	Node* search(Entry e, Node* r, bool x_level);
-	double distance(Entry e1, Entry e2);
-	void printInOrder(Node* r);
+	double distance(double x1, double x2, double y1, double y2);
+	//void printInOrder(Node* r);
 	virtual ~Node(void);
-private:
-	double best_dist_;
 };
 
